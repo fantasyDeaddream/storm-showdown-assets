@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>风暴对决 · 平衡性改动（最终版） — Storm Showdown Balance v3</title>
+<style>
+:root {
+    --bg-primary: #060608;
+    --bg-secondary: #0e0e14;
+    --bg-card: #14141c;
+    --bg-card-hover: #1a1a26;
+    --text-primary: #d8d0c0;
+    --text-secondary: #988870;
+    --text-heading: #e8e0d0;
+    --accent-gold: #c8a040;
+    --accent-blue: #5088c0;
+    --accent-green: #48a860;
+    --accent-red: #c04848;
+    --accent-purple: #9b40c0;
+    --accent-cyan: #40b8c0;
+    --accent-orange: #d08040;
+    --border-subtle: #282830;
+    --border-card: #2a2a35;
+    --tag-new-bg: #1a3a1a;
+    --tag-new: #40d060;
+    --tag-removed-bg: #3a1a1a;
+    --tag-removed: #d06060;
+    --shadow-card: 0 2px 16px rgba(0,0,0,.4);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    font-family: 'Segoe UI','Noto Sans SC','Microsoft YaHei',sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.85;
+    overflow-x: hidden;
+}
+
+/* ═══ HERO ═══ */
+.hero {
+    position: relative;
+    background: linear-gradient(180deg, #0d0d20 0%, #0a0818 30%, #060608 100%);
+    padding: 60px 20px 40px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-subtle);
+    overflow: hidden;
+}
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 30% 20%, rgba(200,160,64,.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(80,136,192,.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(200,160,64,.12) 0%, transparent 40%);
+    pointer-events: none;
+}
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+    opacity: .4;
+}
+.hero-badge {
+    display: inline-block;
+    background: var(--accent-gold);
+    color: #0a0a0f;
+    font-weight: 700;
+    font-size: .7rem;
+    letter-spacing: 3px;
+    padding: 5px 16px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+.hero h1 {
+    font-size: 2.1rem;
+    color: var(--text-heading);
+    letter-spacing: 2px;
+    margin: 8px 0;
+}
+.hero h1 .sub {
+    display: block;
+    font-size: .42em;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-top: 6px;
+    letter-spacing: 1px;
+}
+.hero-version {
+    color: var(--text-secondary);
+    font-size: .85rem;
+    margin-top: 10px;
+}
+.hero-corner-deco {
+    position: absolute;
+    width: 60px; height: 60px;
+    border: 1px solid rgba(200,160,64,.15);
+    pointer-events: none;
+}
+.hero-corner-deco.tl { top: 20px; left: 20px; border-right: none; border-bottom: none; }
+.hero-corner-deco.tr { top: 20px; right: 20px; border-left: none; border-bottom: none; }
+.hero-corner-deco.bl { bottom: 20px; left: 20px; border-right: none; border-top: none; }
+.hero-corner-deco.br { bottom: 20px; right: 20px; border-left: none; border-top: none; }
+
+/* ═══ LAYOUT ═══ */
+.container {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+.content-section {
+    padding: 30px 0;
+}
+
+/* ═══ SECTION DIVIDER ═══ */
+.section-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 40px 0 24px;
+}
+.section-divider .line {
+    flex: 1;
+    max-width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,160,64,.3));
+}
+.section-divider .line:last-child {
+    background: linear-gradient(90deg, rgba(200,160,64,.3), transparent);
+}
+.section-divider .icon {
+    font-size: 1.3rem;
+    opacity: .6;
+}
+.section-header {
+    text-align: center;
+    margin: 8px 0 28px;
+}
+.section-header h2 {
+    display: inline-block;
+    font-size: 1.15rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    border: 1px solid var(--accent-gold);
+    border-radius: 4px;
+    color: var(--accent-gold);
+}
+.section-header h2.global { color: var(--accent-gold); border-color: var(--accent-gold); }
+.section-header h2.economy { color: var(--accent-cyan); border-color: var(--accent-cyan); }
+.section-header h2.commanders { color: var(--accent-blue); border-color: var(--accent-blue); }
+
+/* ═══ SCREENSHOT PAGE BREAK ═══ */
+.page-break {
+    position: relative;
+    height: 2px;
+    margin: 40px 0;
+    background: transparent;
+    border: none;
+}
+.page-break::after {
+    content: '— ✦ —';
+    display: block;
+    text-align: center;
+    color: var(--accent-gold);
+    font-size: .8rem;
+    opacity: .35;
+}
+
+/* ═══ TAG BADGES ═══ */
+.tag-badge {
+    display: inline-block;
+    font-size: .68rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-right: 4px;
+    vertical-align: middle;
+}
+.tag-new { background: var(--tag-new-bg); color: var(--tag-new); }
+.tag-removed { background: var(--tag-removed-bg); color: var(--tag-removed); }
+
+/* ═══ GLOBAL CHANGES ═══ */
+.global-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 8px;
+    padding: 22px 26px;
+    margin: 16px 0;
+    border-left: 3px solid var(--accent-gold);
+    transition: border-color .2s, background .2s;
+}
+.global-card:hover {
+    border-color: rgba(200,160,64,.4);
+    background: var(--bg-card-hover);
+}
+.global-card h3 {
+    font-size: 1rem;
+    color: var(--text-heading);
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+.global-card h3 .num {
+    color: var(--accent-gold);
+    margin-right: 6px;
+}
+.global-card ul {
+    list-style: none;
+    padding: 0;
+}
+.global-card ul li {
+    padding: 4px 0;
+    font-size: .88rem;
+    color: var(--text-secondary);
+    position: relative;
+    padding-left: 16px;
+}
+.global-card ul li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+.global-card ul li strong {
+    color: var(--text-primary);
+}
+
+/* ═══ OLD/NEW VALUES ═══ */
+.old-val {
+    color: var(--accent-red);
+    text-decoration: line-through;
+    opacity: .75;
+}
+.new-val {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+.arrow {
+    color: var(--accent-gold);
+    margin: 0 4px;
+}
+
+/* ═══ ECONOMY TABLE ═══ */
+.econ-intro {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-cyan);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: .88rem;
+    color: var(--text-secondary);
+    line-height: 1.9;
+}
+.econ-intro strong { color: var(--text-primary); }
+.econ-table-wrap {
+    overflow-x: auto;
+    margin: 16px 0;
+    border-radius: 8px;
+    border: 1px solid var(--border-card);
+}
+.econ-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: .85rem;
+}
+.econ-table thead {
+    background: var(--bg-card);
+}
+.econ-table thead th {
+    padding: 12px 16px;
+    text-align: left;
+    color: var(--accent-cyan);
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-size: .78rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--border-subtle);
+}
+.econ-table tbody td {
+    padding: 9px 16px;
+    border-bottom: 1px solid rgba(255,255,255,.04);
+    color: var(--text-secondary);
+}
+.econ-table tbody tr {
+    transition: background .15s;
+}
+.econ-table tbody tr:hover {
+    background: rgba(200,160,64,.04);
+}
+.econ-table tbody tr:last-child td {
+    border-bottom: none;
+}
+.econ-table .cmdr-name {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+.econ-table .bonus-val {
+    color: var(--accent-gold);
+    font-weight: 600;
+}
+.econ-table .bonus-zero {
+    color: var(--accent-green);
+    font-weight: 600;
+}
+
+/* ═══ COMMANDER CARD ═══ */
+.cmdr-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 32px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+.cmdr-section-title h3 {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: var(--text-heading);
+}
+.cmdr-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 10px;
+    padding: 0;
+    margin: 18px 0;
+    display: flex;
+    overflow: hidden;
+    transition: border-color .2s, box-shadow .2s;
+    box-shadow: var(--shadow-card);
+}
+.cmdr-card:hover {
+    border-color: rgba(200,160,64,.27);
+    box-shadow: 0 4px 24px rgba(0,0,0,.5);
+}
+.cmdr-card .cmdr-portrait {
+    flex-shrink: 0;
+    width: 200px;
+    min-height: 280px;
+    background-size: cover;
+    background-position: center top;
+    background-repeat: no-repeat;
+    position: relative;
+    border-right: 1px solid var(--border-subtle);
+}
+.cmdr-card .cmdr-portrait::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(6,6,8,.7) 95%, var(--bg-card) 100%);
+}
+.cmdr-card .cmdr-body {
+    flex: 1;
+    padding: 20px 24px;
+    min-width: 0;
+}
+.cmdr-card .cmdr-body h4 {
+    font-size: 1.05rem;
+    color: var(--text-heading);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+.cmdr-card .cmdr-body .cmdr-en {
+    font-size: .78rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    margin-left: 4px;
+}
+.cmdr-card .cmdr-body .change-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+.cmdr-card .cmdr-body .change-list li {
+    padding: 5px 0;
+    font-size: .86rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+.cmdr-card .cmdr-body .change-list li strong {
+    color: var(--text-primary);
+}
+.change-item-line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px;
+}
+.strikethrough {
+    text-decoration: line-through;
+    opacity: .55;
+}
+
+/* ═══ DESC BLOCK ═══ */
+.desc-block {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--accent-gold);
+    padding: 14px 18px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: .84rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+}
+.desc-block strong { color: var(--text-primary); }
+
+/* ═══ NOTE ═══ */
+.note-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin: 20px 0;
+}
+.note-block h3 {
+    color: var(--accent-gold);
+    font-size: .95rem;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+.note-block p {
+    font-size: .85rem;
+    color: var(--text-secondary);
+}
+
+/* ═══ FOOTER ═══ */
+.site-footer {
+    text-align: center;
+    padding: 36px 20px;
+    color: var(--text-secondary);
+    font-size: .76rem;
+    border-top: 1px solid var(--border-subtle);
+    margin-top: 40px;
+}
+.site-footer p { margin: 4px 0; }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 720px) {
+    .hero h1 { font-size: 1.4rem; }
+    .cmdr-card { flex-direction: column; }
+    .cmdr-card .cmdr-portrait {
+        width: 100%;
+        min-height: 200px;
+        max-height: 260px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-subtle);
+    }
+    .container { padding: 0 14px; }
+    .hero-corner-deco { display: none; }
+}
+
+/* ═══ ANIMATIONS ═══ */
+.cmdr-card, .global-card, .desc-block, .econ-intro {
+    animation: fadeUp .5s ease both;
+}
+@keyframes fadeUp {
+    from { opacity:0; transform:translateY(12px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+/* ═══ STAGGER ═══ */
+.cmdr-card:nth-child(1) { animation-delay: .05s; }
+.cmdr-card:nth-child(2) { animation-delay: .1s; }
+.cmdr-card:nth-child(3) { animation-delay: .15s; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+    <div class="hero-corner-deco tl"></div>
+    <div class="hero-corner-deco tr"></div>
+    <div class="hero-corner-deco bl"></div>
+    <div class="hero-corner-deco br"></div>
+    <span class="hero-badge">Balance Patch v3 · 最终版</span>
+    <h1>风暴对决 · 平衡性改动<span class="sub">Storm Showdown — Co-op PVP Balance Changes (Final)</span></h1>
+    <div class="hero-version">星际争霸II 合作模式 PVP · 社区平衡测试</div>
+</header>
+
+<main class="container">
+
+<!-- ═══════════════ 备注 ═══════════════ -->
+<div class="note-block">
+    <h3>📋 阅读备注</h3>
+    <p>标注 <span class="tag-badge tag-removed">已移除</span> 的内容为PTR中曾出现但已删除的改动（以删除线标示）。<br>
+    标注 <span class="tag-badge tag-new">新增</span> 的为本次最终版新增/调整的条目。</p>
+</div>
+
+<!-- ═══════════════ SECTION 1: 全局机制改动 ═══════════════ -->
+<hr class="page-break">
+<div class="section-divider">
+    <span class="line"></span><span class="icon">⚙</span><span class="line"></span>
+</div>
+<div class="section-header"><h2 class="global">一 · 全局机制改动</h2></div>
+
+<div class="global-card">
+    <h3><span class="num">1.</span> 隐身 / 埋地锚定</h3>
+    <ul>
+        <li><span class="tag-badge tag-removed">已移除</span> <span class="strikethrough">将全局<strong>隐身</strong>和<strong>埋地</strong>锚定到<strong>3分钟</strong>解锁（包括蜘蛛雷、寡妇雷、剧毒巢穴）</span></li>
+        <li><span class="tag-badge tag-new">新增</span> <strong>诺娃鬼兵</strong>需要研究科技才有隐形</li>
+        <li><span class="tag-badge tag-new">新增</span> <strong>埋地</strong>需要花费 <strong>100/100</strong> 研究，采用天梯研发时间</li>
+    </ul>
+</div>
+
+<div class="global-card">
+    <h3><span class="num">2.</span> 伤害减免调整</h3>
+    <ul>
+        <li>农民受到法术伤害减免：<span class="old-val">50%</span> <span class="arrow">→</span> <span class="new-val">25%</span></li>
+    </ul>
+</div>
+
+<div class="global-card">
+    <h3><span class="num">3.</span> 建筑调整</h3>
+    <ul>
+        <li>压制塔普攻范围调整，侦察范围增加到 <strong>18</strong>，普攻对建筑有增伤效果</li>
+    </ul>
+</div>
+
+<!-- ═══════════════ SECTION 2: 开局经济机制改动 ═══════════════ -->
+<hr class="page-break">
+<div class="section-divider">
+    <span class="line"></span><span class="icon">💰</span><span class="line"></span>
+</div>
+<div class="section-header"><h2 class="economy">二 · 开局经济机制改动 (T1 补钱策略)</h2></div>
+
+<div class="econ-intro">
+    <p><strong>锚定方式：</strong>以主矿 <strong>2个补给、2个气矿、6个采集农民</strong>（2×100 + 2×75 + 6×50 = <strong>650</strong>）为标准，进行开局经济拉平。再往后的经济收益，不再拉平范围内。</p>
+    <p>这些资源会在<strong>300秒</strong>内缓慢增加给指挥官，按照 <strong>矿 : 气 = 2 : 1</strong> 的比例。</p>
+    <p><strong>泽拉图</strong> —— 上述全部免费，<strong>0 补钱</strong>。<br>
+    （霍纳与诺娃因补农民速度最慢，额外 +100 矿）</p>
+</div>
+
+<div class="econ-table-wrap">
+<table class="econ-table">
+<thead>
+<tr>
+    <th>指挥官</th>
+    <th>补钱数额</th>
+    <th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="cmdr-name">雷诺</td><td class="bonus-val">+300</td><td>有轨道控制基地 -150，有科技减价 -200</td></tr>
+<tr><td class="cmdr-name">凯瑞甘</td><td class="bonus-val">+450</td><td>有科技减价 -200</td></tr>
+<tr><td class="cmdr-name">阿塔尼斯</td><td class="bonus-val">+450</td><td>-2 补给</td></tr>
+<tr><td class="cmdr-name">斯旺</td><td class="bonus-val">+500</td><td>高级建造 -150</td></tr>
+<tr><td class="cmdr-name">扎加拉</td><td class="bonus-val">+350</td><td>-300（10工蜂 + 1.5王虫补给差价）</td></tr>
+<tr><td class="cmdr-name">沃拉尊</td><td class="bonus-val">+400</td><td>-6农民，轨道吸纳舱 +50</td></tr>
+<tr><td class="cmdr-name">凯拉克斯</td><td class="bonus-val">+650</td><td>—</td></tr>
+<tr><td class="cmdr-name">阿巴瑟</td><td class="bonus-val">+600</td><td>分裂池和蟑螂温室差价</td></tr>
+<tr><td class="cmdr-name">阿拉纳克</td><td class="bonus-val">+650</td><td>—</td></tr>
+<tr><td class="cmdr-name">诺娃</td><td class="bonus-val">+300</td><td>-6农民，-2补给，自动化精炼厂每个100，+100</td></tr>
+<tr><td class="cmdr-name">斯托科夫</td><td class="bonus-val">+650</td><td>—</td></tr>
+<tr><td class="cmdr-name">菲尼克斯</td><td class="bonus-val">+500</td><td>BG BY -150</td></tr>
+<tr><td class="cmdr-name">德哈卡</td><td class="bonus-val">+450</td><td>-2 补给</td></tr>
+<tr><td class="cmdr-name">霍纳与汉</td><td class="bonus-val">+500</td><td>少100矿100气(≈250矿)的BB+VF，+100</td></tr>
+<tr><td class="cmdr-name">泰凯斯</td><td class="bonus-val">+450</td><td>-2 补给</td></tr>
+<tr><td class="cmdr-name">泽拉图</td><td class="bonus-zero">0</td><td>全部免费</td></tr>
+<tr><td class="cmdr-name">斯台特曼</td><td class="bonus-val">+450</td><td>"艾的急切"超载 -200</td></tr>
+<tr><td class="cmdr-name">蒙斯克</td><td class="bonus-val">+400</td><td>-50（10帝国劳工差价），工作人员 -150</td></tr>
+</tbody>
+</table>
+</div>
+
+<!-- ═══════════════ SECTION 3: 指挥官平衡性改动 ═══════════════ -->
+<hr class="page-break">
+<div class="section-divider">
+    <span class="line"></span><span class="icon">⚔</span><span class="line"></span>
+</div>
+<div class="section-header"><h2 class="commanders">三 · 指挥官平衡性改动</h2></div>
+
+<!-- ─── 扎加拉 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_zagara.png')"></div>
+    <div class="cmdr-body">
+        <h4>扎加拉 <span class="cmdr-en">Zagara</span></h4>
+        <ul class="change-list">
+            <li>毒爆虫对建筑伤害减少：<span class="old-val">+??</span> <span class="arrow">→</span> <span class="new-val">+10（50）</span>，升级 <span class="new-val">+5（4+1）</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 阿塔尼斯 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_artanis.png')"></div>
+    <div class="cmdr-body">
+        <h4>阿塔尼斯 <span class="cmdr-en">Artanis</span></h4>
+        <ul class="change-list">
+            <li><span class="tag-badge tag-removed">已移除</span> <span class="strikethrough">选择大主教下船后，额外<strong>赠送三个狂热者</strong></span></li>
+            <li><span class="tag-badge tag-new">新增</span> T2天赋 <strong>"护盾超载"</strong>：护盾超载吸收伤害量、持续时间、冷却速度增加 <strong>25%</strong></li>
+            <li><span class="tag-badge tag-removed">已移除</span> <span class="strikethrough">增强大主教风暴到合作原版（合作原版风暴比天梯风暴数值高，就是对空少了3射程）</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 泰凯斯 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_tychus.png')"></div>
+    <div class="cmdr-body">
+        <h4>泰凯斯 <span class="cmdr-en">Tychus</span></h4>
+        <ul class="change-list">
+            <li>老油条炸弹对英雄单位伤害：<span class="old-val">秒杀</span> <span class="arrow">→</span> <span class="new-val">500</span>，爆炸后追加 <strong>500 持续伤害</strong></li>
+            <li>人口上限：<span class="old-val">100</span> <span class="arrow">→</span> <span class="new-val">110</span>（合作中本体不占用人口，Bug修复）</li>
+        </ul>
+        <div class="desc-block">
+            <p>老油条炸弹一下秒杀凯瑞甘、泽拉图、霍纳至尊大和等的战略意义过于出色，调整为500直伤+500持续伤害。</p>
+        </div>
+    </div>
+</div>
+
+<!-- ─── 泽拉图 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_zeratul.png')"></div>
+    <div class="cmdr-body">
+        <h4>泽拉图 <span class="cmdr-en">Zeratul</span></h4>
+        <ul class="change-list">
+            <li>军团长获得<strong>英雄标签</strong>（避免传奇军团加载时与传奇军团天赋冲突）</li>
+            <li>追猎价格：<span class="old-val">215/43</span> <span class="arrow">→</span> <span class="new-val">200/50</span></li>
+            <li>"传奇军团"天赋选择后会<strong>禁用传奇军团面板</strong></li>
+            <li>隐刀复活时去掉减伤，改为 <strong>+200 等离子护盾</strong></li>
+            <li>军团英雄 <strong>特布鲁斯</strong> 需要黑暗圣坛才能建造</li>
+            <li><span class="tag-badge tag-new">新增</span> 传奇军团可以选择<strong>红球</strong>（削弱版本，仅保留沃拉尊红球技能）</li>
+            <li><span class="tag-badge tag-new">新增</span> "时空利刃"天赋改为 <strong>"旋风斩CD"</strong>：减少旋风斩冷却至 <strong>3秒</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 斯托科夫 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_stukov.png')"></div>
+    <div class="cmdr-body">
+        <h4>斯托科夫 <span class="cmdr-en">Stukov</span></h4>
+        <ul class="change-list">
+            <li><strong>"坦克弹药"天赋：</strong>被感染的坦克无限弹药，<span class="strikethrough">但坦克死亡不会孵化易爆感染体</span>，降低坦克最大弹药数量到 <strong>1</strong></li>
+            <li>被感染坦克生成弹药基础速度 <strong>增加 100%</strong></li>
+            <li>被感染的解放：普攻方式改为普通解放对空方式，<strong>去掉虚化科技</strong></li>
+            <li>解放伤害：<strong>7×6</strong>，<strong>0.75 半径 AOE</strong>。新增科技 <strong>"病毒感染"</strong>：对主要目标伤害增加 <strong>100%</strong>，溅射伤害不变</li>
+        </ul>
+        <div class="desc-block">
+            <p>原坦克弹药天赋让感染坦克几乎地面无敌：远程火炮拒止，近战击杀爆出8个感染人。削弱近战爆毒爆功能，同时提升基础弹药速度——将此功能留给生化天赋。</p>
+        </div>
+    </div>
+</div>
+
+<!-- ─── 诺娃 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_nova.png')"></div>
+    <div class="cmdr-body">
+        <h4>诺娃 <span class="cmdr-en">Nova</span></h4>
+        <ul class="change-list">
+            <li>开局产能改为<strong>天梯补兵模式</strong>：量产出兵天赋解锁建造多个建筑，快速空投天赋解锁空投</li>
+            <li><span class="tag-badge tag-new">新增</span> 狙击伤害：<span class="old-val">145</span> <span class="arrow">→</span> <span class="new-val">200</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 凯拉克斯 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_karax.png')"></div>
+    <div class="cmdr-body">
+        <h4>凯拉克斯 <span class="cmdr-en">Karax</span></h4>
+        <ul class="change-list">
+            <li>太阳能射线伤害：<span class="old-val">45</span> <span class="arrow">→</span> <span class="new-val">65</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 菲尼克斯 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_fenix.png')"></div>
+    <div class="cmdr-body">
+        <h4>菲尼克斯 <span class="cmdr-en">Fenix</span></h4>
+        <ul class="change-list">
+            <li>第一个天赋获得<strong>援军</strong></li>
+            <li>场上存活战甲时，<strong>面板免费</strong>（免费切换战甲模式）</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 德哈卡 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_dehaka.png')"></div>
+    <div class="cmdr-body">
+        <h4>德哈卡 <span class="cmdr-en">Dehaka</span></h4>
+        <ul class="change-list">
+            <li>原始蠕虫建造价格：<span class="old-val">125</span> <span class="arrow">→</span> <span class="new-val">140</span></li>
+            <li>深槽虫道技能：<strong>取消距离限制</strong>，增加施法时间，使用后永久获得召唤物标签，<strong>消耗 2 人口</strong></li>
+            <li>基地<strong>取消消耗 2 人口</strong>设定</li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 蒙斯克 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_mengsk.png')"></div>
+    <div class="cmdr-body">
+        <h4>蒙斯克 <span class="cmdr-en">Mengsk</span></h4>
+        <ul class="change-list">
+            <li>皇家鬼兵核弹<strong>制造</strong>需要消耗 <strong>25 矿</strong></li>
+            <li>战争恶犬 3级和4级增加 <strong>200秒开局CD</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 霍纳与汉 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_hanandhorner.png')"></div>
+    <div class="cmdr-body">
+        <h4>霍纳与汉 <span class="cmdr-en">Han &amp; Horner</span></h4>
+        <ul class="change-list">
+            <li>帝国舰队单位：<strong>减少矿物消耗，增加气体消耗</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 阿拉纳克 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_alarak.png')"></div>
+    <div class="cmdr-body">
+        <h4>阿拉纳克 <span class="cmdr-en">Alarak</span></h4>
+        <ul class="change-list">
+            <li>塔达林母舰传送添加了<strong>提示动画</strong></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<hr class="page-break">
+
+</main>
+
+<footer class="site-footer">
+    <p>风暴对决 · Storm Showdown — 星际争霸II 合作模式 PVP 社区平衡项目</p>
+    <p style="opacity:.5">StarCraft® II and all related trademarks are the property of Blizzard Entertainment, Inc. This is a fan-made community balance project.</p>
+    <p style="opacity:.4;margin-top:8px;">—— 最终版 v3 · Final Version ——</p>
+</footer>
+
+</body>
+</html>
