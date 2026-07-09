@@ -255,6 +255,37 @@ body {
 }
 .desc-block strong { color: var(--text-primary); }
 
+/* ═══ GLOBAL CARD ═══ */
+.global-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 14px 0;
+    border-left: 3px solid var(--accent-gold);
+    transition: border-color .2s, background .2s;
+}
+.global-card:hover {
+    border-color: rgba(200,160,64,.4);
+    background: var(--bg-card-hover);
+}
+.global-card h3 {
+    font-size: .95rem;
+    color: var(--text-heading);
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+.global-card ul {
+    list-style: none;
+    padding: 0;
+}
+.global-card ul li {
+    padding: 4px 0;
+    font-size: .86rem;
+    color: var(--text-secondary);
+}
+.global-card ul li strong { color: var(--text-primary); }
+
 /* ═══ PTR SUMMARY TABLE ═══ */
 .ptr-summary {
     background: var(--bg-card);
@@ -355,6 +386,7 @@ body {
     <tr><th>指挥官</th><th>摘要</th></tr>
     </thead>
     <tbody>
+    <tr><td class="cmdr-name">通用</td><td>BP随机选择、移除星灵枢纽召回、修复准备Bug</td></tr>
     <tr><td class="cmdr-name">霍纳与汉</td><td>星港起落价格Bug修复</td></tr>
     <tr><td class="cmdr-name">阿塔尼斯</td><td>高阶圣堂武士、风暴战舰调整，威望Bug修复</td></tr>
     <tr><td class="cmdr-name">斯台特曼</td><td>机械感染者自动施法，蟑螂出击能耗降低</td></tr>
@@ -363,6 +395,33 @@ body {
     <tr><td class="cmdr-name">蒙斯克</td><td>初始补钱经济调整</td></tr>
     </tbody>
     </table>
+</div>
+
+<!-- ═══════════════ SECTION: 通用改动 ═══════════════ -->
+<div class="section-divider">
+    <span class="line"></span><span class="icon">⚙</span><span class="line"></span>
+</div>
+<div class="section-header"><h2>通用改动 · General Changes</h2></div>
+
+<div class="global-card">
+    <h3>BP 界面 · 随机选择</h3>
+    <ul>
+        <li>BP界面增加<strong>随机选择功能</strong>——不选择指挥官直接准备即为<strong>随机</strong></li>
+    </ul>
+</div>
+
+<div class="global-card">
+    <h3>星灵枢纽 · Nexus</h3>
+    <ul>
+        <li>移除<strong>星灵枢纽召回</strong>技能</li>
+    </ul>
+</div>
+
+<div class="global-card">
+    <h3>Bug 修复 · Bug Fix</h3>
+    <ul>
+        <li>修复了最后一秒准备导致下一位玩家<strong>自动选择雷诺</strong>的Bug</li>
+    </ul>
 </div>
 
 <!-- ═══════════════ SECTION: 指挥官改动 ═══════════════ -->
@@ -397,7 +456,7 @@ body {
 
 <!-- ─── 斯台特曼 ─── -->
 <div class="cmdr-card">
-    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_stetmann.png')"></div>
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/refs/heads/main/Commander_Figures/Ui_loading_coop_hero_stetmann.png')"></div>
     <div class="cmdr-body">
         <h4>斯台特曼 <span class="cmdr-en">Stetmann</span></h4>
         <ul class="change-list">
