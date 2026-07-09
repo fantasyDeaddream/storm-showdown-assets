@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>风暴对决 · PTR 更新 — Storm Showdown PTR 2026.7.9</title>
+<title>风暴对决 · 平衡性改动 — Storm Showdown Balance Update 2026.7.9</title>
 <style>
 :root {
     --bg-primary: #060608;
@@ -334,34 +334,33 @@ body {
 
 <!-- ═══════════════ HERO ═══════════════ -->
 <header class="hero">
-    <span class="hero-badge">PTR Update · 公开测试</span>
-    <h1>风暴对决 · PTR 更新<span class="sub">Storm Showdown — Co-op PVP PTR Update 2026.7.9</span></h1>
-    <div class="hero-version">星际争霸II 合作模式 PVP · 公开测试服 · 2026年7月9日</div>
+    <span class="hero-badge">UPDATE · 更新</span>
+    <h1>风暴对决 · 平衡性改动<span class="sub">Storm Showdown — Co-op PVP Balance Update 2026.7.9</span></h1>
+    <div class="hero-version">星际争霸II 合作模式 PVP · 2026年7月9日</div>
 </header>
 
 <main class="container">
 
 <!-- ═══════════════ 备注 ═══════════════ -->
 <div class="note-block">
-    <h3>📋 PTR 说明 · Public Test Realm</h3>
-    <p>以下改动已在公开测试服（PTR）上线，数值可能根据测试反馈进一步调整。
-    <br>标注 <span class="tag-badge tag-fix">修复</span> 的为Bug修复；标注 <span class="tag-badge tag-new">新增</span> 的为新增/调整内容。</p>
+    <h3>📋 阅读备注 · Notes</h3>
+    <p>以下改动基于社区测试反馈与录像数据分析制定，数值将根据实战表现持续迭代。</p>
 </div>
 
-<!-- ═══════════════ PTR 概览 ═══════════════ -->
+<!-- ═══════════════ 概览 ═══════════════ -->
 <div class="ptr-summary">
-    <h3>本次 PTR 涉及指挥官 · Affected Commanders</h3>
+    <h3>本次更新涉及指挥官 · Affected Commanders</h3>
     <table class="ptr-summary-table">
     <thead>
-    <tr><th>指挥官</th><th>改动类型</th><th>摘要</th></tr>
+    <tr><th>指挥官</th><th>摘要</th></tr>
     </thead>
     <tbody>
-    <tr><td class="cmdr-name">霍纳与汉</td><td><span class="tag-badge tag-fix">修复</span></td><td>星港价格不一致修复</td></tr>
-    <tr><td class="cmdr-name">阿塔尼斯</td><td><span class="tag-badge tag-new">新增</span> / <span class="tag-badge tag-fix">修复</span></td><td>高阶圣堂武士、风暴战舰调整，威望Bug修复</td></tr>
-    <tr><td class="cmdr-name">斯台特曼</td><td><span class="tag-badge tag-new">新增</span></td><td>机械感染者自动施法，蟑螂出击能耗降低</td></tr>
-    <tr><td class="cmdr-name">泽拉图</td><td><span class="tag-badge tag-new">新增</span></td><td>神器价格曲线调整</td></tr>
-    <tr><td class="cmdr-name">雷诺</td><td><span class="tag-badge tag-new">新增</span></td><td>移除双矿骡，改为自动矿骡增强</td></tr>
-    <tr><td class="cmdr-name">蒙斯克</td><td><span class="tag-badge tag-new">新增</span></td><td>初始补钱经济调整</td></tr>
+    <tr><td class="cmdr-name">霍纳与汉</td><td>星港起落价格Bug修复</td></tr>
+    <tr><td class="cmdr-name">阿塔尼斯</td><td>高阶圣堂武士、风暴战舰调整，威望Bug修复</td></tr>
+    <tr><td class="cmdr-name">斯台特曼</td><td>机械感染者自动施法，蟑螂出击能耗降低</td></tr>
+    <tr><td class="cmdr-name">泽拉图</td><td>神器价格曲线调整</td></tr>
+    <tr><td class="cmdr-name">雷诺</td><td>移除双矿骡，改为自动矿骡增强</td></tr>
+    <tr><td class="cmdr-name">蒙斯克</td><td>初始补钱经济调整</td></tr>
     </tbody>
     </table>
 </div>
@@ -378,7 +377,7 @@ body {
     <div class="cmdr-body">
         <h4>霍纳与汉 <span class="cmdr-en">Han &amp; Horner</span></h4>
         <ul class="change-list">
-            <li><span class="tag-badge tag-fix">修复</span> 修复霍纳<strong>星港价格不一致</strong>的问题</li>
+            <li>修复霍纳与汉<strong>星港起落</strong>会触发 <strong>+150/100</strong> 和 <strong>-150/100</strong> 的Bug</li>
         </ul>
     </div>
 </div>
@@ -389,9 +388,9 @@ body {
     <div class="cmdr-body">
         <h4>阿塔尼斯 <span class="cmdr-en">Artanis</span></h4>
         <ul class="change-list">
-            <li><span class="tag-badge tag-new">新增</span> <strong>高阶圣堂武士</strong>自带能量潮涌升级（灵能风暴回盾）</li>
-            <li><span class="tag-badge tag-new">新增</span> <strong>风暴战舰</strong>调整为原版风暴（修改为主战单位定位）</li>
-            <li><span class="tag-badge tag-fix">修复</span> 修复风暴战舰<strong>威望1「勇敢激励者」</strong>衰变加成错误的问题</li>
+            <li><strong>高阶圣堂武士</strong>自带能量潮涌升级（灵能风暴回盾）</li>
+            <li><strong>风暴战舰</strong>调整为原版风暴（修改为主战单位定位）</li>
+            <li>修复风暴战舰<strong>威望1「勇敢激励者」</strong>衰变加成错误的问题</li>
         </ul>
     </div>
 </div>
@@ -402,7 +401,7 @@ body {
     <div class="cmdr-body">
         <h4>斯台特曼 <span class="cmdr-en">Stetmann</span></h4>
         <ul class="change-list">
-            <li><span class="tag-badge tag-new">新增</span> <strong>机械感染者</strong>增加蟑螂出击的<strong>自动施法</strong></li>
+            <li><strong>机械感染者</strong>增加蟑螂出击的<strong>自动施法</strong></li>
             <li>蟑螂出击能量消耗：<span class="old-val">250</span> <span class="arrow">→</span> <span class="new-val">200</span>（减少50）</li>
         </ul>
     </div>
@@ -414,8 +413,8 @@ body {
     <div class="cmdr-body">
         <h4>泽拉图 <span class="cmdr-en">Zeratul</span></h4>
         <ul class="change-list">
-            <li>第一块神器价格：<span class="old-val">???</span> <span class="arrow">→</span> <span class="new-val">100/100</span></li>
-            <li>第二块神器价格：<span class="old-val">???</span> <span class="arrow">→</span> <span class="new-val">225/225</span></li>
+            <li>第一块神器价格：<span class="old-val">300/300</span> <span class="arrow">→</span> <span class="new-val">200/200</span></li>
+            <li>第二块神器价格：<span class="old-val">400/400</span> <span class="arrow">→</span> <span class="new-val">450/450</span></li>
         </ul>
         <div class="desc-block">
             <p>降低第一块神器的入手门槛，使泽拉图前期节奏更加平滑；提高第二块神器价格为中后期强度设限。</p>
@@ -432,7 +431,7 @@ body {
             <li>移除<strong>双矿骡任务</strong>，改为<strong>自动矿骡 +50% 持续时间</strong></li>
         </ul>
         <div class="desc-block">
-            <p>简化雷诺经济操作——不再需要手动调度双矿骡，自动矿骡持续时间提升50%作为补偿，让玩家更专注于正面战场。</p>
+            <p>限制雷诺中期的爆发能力，调整为更长久的经济收益而不是大量兵力的瞬间爆发。</p>
         </div>
     </div>
 </div>
@@ -454,9 +453,9 @@ body {
 </main>
 
 <footer class="site-footer">
-    <p>风暴对决 · Storm Showdown — 星际争霸II 合作模式 PVP 社区平衡项目 · PTR 公开测试服</p>
+    <p>风暴对决 · Storm Showdown — 星际争霸II 合作模式 PVP 社区平衡项目</p>
     <p style="opacity:.5">StarCraft® II and all related trademarks are the property of Blizzard Entertainment, Inc. This is a fan-made community balance project.</p>
-    <p style="opacity:.4;margin-top:8px;">—— PTR 2026.7.9 ——</p>
+    <p style="opacity:.4;margin-top:8px;">—— 2026.7.9 ——</p>
 </footer>
 
 </body>
