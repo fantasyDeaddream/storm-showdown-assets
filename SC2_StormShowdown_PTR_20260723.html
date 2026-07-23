@@ -180,19 +180,22 @@ body {
     <table class="ptr-summary-table">
     <thead><tr><th>指挥官</th><th>摘要</th></tr></thead>
     <tbody>
-    <tr><td class="cmdr-name">通用</td><td>英雄赏金Bug修复、数值Bug修复、防空建筑降价</td></tr>
+    <tr><td class="cmdr-name">通用</td><td>数值Bug修复、防空建筑降价</td></tr>
     <tr><td class="cmdr-name">泰凯斯</td><td>赏金上限调整</td></tr>
-    <tr><td class="cmdr-name">阿巴瑟</td><td>飞龙降价、利维坦触手射程增加</td></tr>
+    <tr><td class="cmdr-name">阿巴瑟</td><td>飞龙降价、利维坦触手射程、孢子爬虫生命、图标修复</td></tr>
     <tr><td class="cmdr-name">阿塔尼斯</td><td>凤凰降价</td></tr>
     <tr><td class="cmdr-name">凯拉克斯</td><td>凤凰降价</td></tr>
-    <tr><td class="cmdr-name">德哈卡</td><td>飞龙降价</td></tr>
-    <tr><td class="cmdr-name">凯瑞甘</td><td>飞龙降价</td></tr>
+    <tr><td class="cmdr-name">德哈卡</td><td>飞龙降价、蠕虫Bug修复、1级攻击力调整</td></tr>
+    <tr><td class="cmdr-name">凯瑞甘</td><td>飞龙降价、刺蛇射程与攻击升级调整</td></tr>
     <tr><td class="cmdr-name">蒙斯克</td><td>飞龙降价</td></tr>
     <tr><td class="cmdr-name">沃拉尊</td><td>海盗船降价、先知降价</td></tr>
-    <tr><td class="cmdr-name">雷诺</td><td>女妖降价、维京与大和提价</td></tr>
+    <tr><td class="cmdr-name">扎加拉</td><td>腐化者、爆蚊、毒爆虫攻击升级增强</td></tr>
+    <tr><td class="cmdr-name">雷诺</td><td>雷车/大和对空/大和炮增强、女妖降价、维京与大和提价</td></tr>
+    <tr><td class="cmdr-name">诺娃</td><td>解放者建造时间增加</td></tr>
+    <tr><td class="cmdr-name">斯托科夫</td><td>感染解放者双倍护甲Bug修复</td></tr>
     <tr><td class="cmdr-name">斯旺</td><td>怨灵战机降价</td></tr>
     <tr><td class="cmdr-name">菲尼克斯</td><td>T2天赋作战效能增强</td></tr>
-    <tr><td class="cmdr-name">泽拉图</td><td>T1/T2天赋增强、精华化身重做、禁用虚空之路</td></tr>
+    <tr><td class="cmdr-name">泽拉图</td><td>T1天赋增强、精华化身重做、禁用虚空之路</td></tr>
     <tr><td class="cmdr-name">斯台特曼</td><td>T1天赋艾星冷却与额外艾能增强</td></tr>
     </tbody>
     </table>
@@ -205,10 +208,13 @@ body {
 <div class="section-header"><h2>通用改动 · General Changes</h2></div>
 
 <div class="global-card">
-    <h3>Bug 修复</h3>
+    <h3>Bug 修复 · Bug Fixes</h3>
     <ul>
         <li>修复<strong>英雄赏金</strong>Bug</li>
-        <li>修复<strong>部分数值</strong>Bug</li>
+        <li>修复<strong>部分数值</strong>Bug（详见各指挥官词条）</li>
+        <li>修复<strong>原始蠕虫</strong>对建筑伤害Bug（德哈卡）</li>
+        <li>修复<strong>飞蛇「+4射程」</strong>升级图标遮盖蝗虫对空攻击升级图标的问题（阿巴瑟）</li>
+        <li>修复<strong>被感染的解放者</strong>：移除无效旧武器，双倍伤害升级不再承受双倍护甲（斯托科夫）</li>
     </ul>
 </div>
 
@@ -247,6 +253,8 @@ body {
         <ul class="change-list">
             <li>飞龙价格：<span class="val-buff">56 矿 / 56 气 → 44 矿 / 44 气</span> <span class="tag-buff">加强</span></li>
             <li>利维坦触手射程：<span class="val-buff">3 → 5</span> <span class="tag-buff">加强</span>（同DS）</li>
+            <li><strong>孢子爬虫</strong>（对空管子）生命值：<span class="val-buff">300 → 400</span> <span class="tag-buff">加强</span></li>
+            <li>修复<strong>飞蛇「+4射程」</strong>升级图标遮盖蝗虫对空攻击升级图标的问题</li>
         </ul>
     </div>
 </div>
@@ -280,6 +288,8 @@ body {
         <h4>德哈卡 <span class="cmdr-en">Dehaka</span></h4>
         <ul class="change-list">
             <li>飞龙价格：<span class="val-buff">275 矿 / 150 气 → 180 矿 / 112 气</span> <span class="tag-buff">加强</span></li>
+            <li>德哈卡1级攻击力：<span class="val-nerf">30 → 20</span> <span class="tag-nerf">削弱</span></li>
+            <li>修复<strong>原始蠕虫</strong>对建筑伤害Bug</li>
         </ul>
     </div>
 </div>
@@ -291,6 +301,8 @@ body {
         <h4>凯瑞甘 <span class="cmdr-en">Kerrigan</span></h4>
         <ul class="change-list">
             <li>飞龙价格：<span class="val-buff">75 矿 / 75 气 → 62 矿 / 62 气</span> <span class="tag-buff">加强</span></li>
+            <li>刺蛇基础射程：<span class="val-nerf">移除额外 +1 射程</span> <span class="tag-nerf">削弱</span></li>
+            <li>刺蛇攻击升级：<span class="val-nerf">每级 +2 → +1</span> <span class="tag-nerf">削弱</span></li>
         </ul>
     </div>
 </div>
@@ -318,15 +330,54 @@ body {
     </div>
 </div>
 
+<!-- ─── 扎加拉 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_zagara.png')"></div>
+    <div class="cmdr-body">
+        <h4>扎加拉 <span class="cmdr-en">Zagara</span></h4>
+        <ul class="change-list">
+            <li>腐化者攻击：<span class="val-buff">对重甲 +6 → +14</span> <span class="tag-buff">加强</span></li>
+            <li>腐化者攻击升级：<span class="val-buff">每级对重型 +1 → 对重甲 +2</span> <span class="tag-buff">加强</span></li>
+            <li>爆蚊攻击升级：<span class="val-buff">每级 +5 → +11</span> <span class="tag-buff">加强</span></li>
+            <li>毒爆虫攻击升级：<span class="val-buff">每级 +4（对建筑 +1）</span>，原对建筑加成修正为 +1 <span class="tag-buff">加强</span></li>
+        </ul>
+    </div>
+</div>
+
 <!-- ─── 雷诺 ─── -->
 <div class="cmdr-card">
     <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_raynor.png')"></div>
     <div class="cmdr-body">
         <h4>雷诺 <span class="cmdr-en">Raynor</span></h4>
         <ul class="change-list">
+            <li>雷车（秃鹫）对轻甲加成：<span class="val-buff">+13 → +15</span> <span class="tag-buff">加强</span></li>
+            <li>大和（战列巡航舰）对空攻击：<span class="val-buff">5 → 6</span> <span class="tag-buff">加强</span></li>
+            <li>大和炮伤害：<span class="val-buff">240 → 300</span> <span class="tag-buff">加强</span></li>
             <li>女妖价格：<span class="val-buff">135 矿 / 90 气 → 118 矿 / 79 气</span> <span class="tag-buff">加强</span></li>
             <li>维京价格：<span class="val-nerf">90 矿 / 45 气 → 112 矿 / 56 气</span> <span class="tag-nerf">削弱</span></li>
             <li>大和价格：<span class="val-nerf">242 矿 / 181 气 → 268 矿 / 201 气</span> <span class="tag-nerf">削弱</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 诺娃 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_nova.png')"></div>
+    <div class="cmdr-body">
+        <h4>诺娃 <span class="cmdr-en">Nova</span></h4>
+        <ul class="change-list">
+            <li>解放者建造时间：<span class="val-nerf">60 秒【43 秒】 → 120 秒【86 秒】</span> <span class="tag-nerf">削弱</span></li>
+        </ul>
+    </div>
+</div>
+
+<!-- ─── 斯托科夫 ─── -->
+<div class="cmdr-card">
+    <div class="cmdr-portrait" style="background-image:url('https://raw.githubusercontent.com/fantasyDeaddream/storm-showdown-assets/main/Commander_Figures/Ui_loading_coop_hero_stukov.png')"></div>
+    <div class="cmdr-body">
+        <h4>斯托科夫 <span class="cmdr-en">Stukov</span></h4>
+        <ul class="change-list">
+            <li>修复<strong>被感染的解放者</strong>：移除无效旧武器，双倍伤害升级不再承受双倍护甲</li>
         </ul>
     </div>
 </div>
@@ -360,7 +411,6 @@ body {
         <h4>泽拉图 <span class="cmdr-en">Zeratul</span></h4>
         <ul class="change-list">
             <li>T1天赋「大师曲光刃」攻速加成：<span class="val-buff">15% → 30%</span> <span class="tag-buff">加强</span></li>
-            <li>T2天赋「黎明使徒」调整为<strong>超级隐身</strong>，持续 <span class="val-buff">5 秒【3.6 秒】</span> <span class="tag-buff">加强</span></li>
             <li><strong>精华化身</strong>重做：移除退化技能，进化光环修改为直接满Buff（不叠层），<span class="val-buff">+20% 减伤</span>，<span class="val-buff">+60% 攻速</span> <span class="tag-new">新增</span></li>
             <li>精华化身和形体化身<strong>生命减半</strong>，形体化身<strong>价格降低</strong> <span class="tag-new">新增</span></li>
             <li>暂时<strong>禁用「虚空之路」天赋</strong> <span class="tag-new">新增</span></li>
